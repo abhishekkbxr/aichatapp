@@ -88,7 +88,7 @@ export default function ChatPage() {
 
   const handleEndConversation = async () => {
     if (!conversation || conversation.status === "ended") return;
-    if (!confirm("End this conversation?")) return;
+
 
     try {
       // Immediately reflect UI change
@@ -235,10 +235,19 @@ export default function ChatPage() {
             <MessageList messages={conversation.messages} sending={sending} />
 
             {/* Summary Section */}
-            {/* Summary Section */}
             {conversation.status === "ended" && (
               <div className="px-4 py-6 flex flex-col items-center w-full">
-                <div className="w-full bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-900/30 dark:to-blue-950/40 border border-blue-200 dark:border-blue-800 rounded-xl p-6 shadow-md animate-fade-in">
+                <div
+                  className="
+        w-full 
+        bg-gradient-to-br from-blue-50 to-blue-100 
+        dark:from-blue-900/30 dark:to-blue-950/40 
+        border border-blue-200 dark:border-blue-800 
+        rounded-xl p-6 shadow-md animate-fade-in
+        max-h-[250px] overflow-y-auto
+        sm:max-h-none sm:overflow-visible
+      "
+                >
                   <div className="flex items-center gap-2 mb-3">
                     <span className="text-blue-600 dark:text-blue-300 font-semibold">
                       🤖 AI Summary
