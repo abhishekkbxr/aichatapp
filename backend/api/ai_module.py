@@ -11,11 +11,6 @@ load_dotenv()
 
 
 class AIIntegration:
-    """
-    AI integration using OpenAI's Python SDK v2.
-    Expects messages as a list of dicts with keys: {"role": "user"|"assistant"|"system", "content": str}
-    Falls back to simulated responses if OPENAI_API_KEY is not set or SDK is unavailable.
-    """
 
     def __init__(self):
         self.api_key: Optional[str] = os.getenv("OPENAI_API_KEY")
@@ -41,10 +36,6 @@ class AIIntegration:
         return f"[Simulated] Summary: {count_user} user messages, {count_ai} AI messages."
 
     def get_ai_response(self, messages: List[Dict[str, str]]) -> str:
-        """
-        Returns an AI response for the given conversation history.
-        messages: list of {"role": "user"|"assistant"|"system", "content": str}
-        """
         if not self.client:
             return self._simulate_reply(messages)
 
@@ -60,9 +51,7 @@ class AIIntegration:
             return f"[AI error] {e}"
 
     def summarize_conversation(self, messages: List[Dict[str, str]]) -> str:
-        """
-        Summarizes the conversation history.
-        """
+
         if not self.client:
             return self._simulate_summary(messages)
 
@@ -79,10 +68,7 @@ class AIIntegration:
             return f"[AI error during summarization] {e}"
 
     def query_past_conversations(self, query: str, all_conversations) -> str:
-        """
-        Answers a query based on summaries of past (ended) conversations.
-        all_conversations: QuerySet of Conversation objects with 'summary' field.
-        """
+
         summaries = [getattr(conv, "summary", "") for conv in all_conversations if getattr(conv, "summary", "")]
         if not summaries:
             return "No past conversation summaries available to query."
