@@ -41,11 +41,21 @@ class AIIntegration:
 
         try:
             resp = self.client.chat.completions.create(
-                model="gpt-4",
-                messages=[{"role": "system", "content": "You are a helpful assistant."}] + messages,
-                temperature=0.7,
-            )
-            # SDK v2: choices[0].message.content
+            model="gpt-4",
+            messages=[
+                {
+                    "role": "system",
+                    "content": (
+                        "You are a friendly, concise AI assistant. "
+                        "Respond in a natural, human-like tone using short, clear sentences. "
+                        "Avoid long explanations unless explicitly asked. "
+                        "Keep answers conversational and to the point."
+                    ),
+                }
+            ] + messages,
+            temperature=0.7,
+            max_tokens=150,  # limits overly long responses
+        )
             return resp.choices[0].message.content
         except Exception as e:
             return f"[AI error] {e}"
@@ -59,7 +69,7 @@ class AIIntegration:
             resp = self.client.chat.completions.create(
                 model="gpt-4",
                 messages=[
-                    {"role": "system", "content": "Summarize the following conversation in 3-5 concise bullet points."}
+                    {"role": "system", "content": "Summarize the following conversation in 2-5 concise bullet points."}
                 ] + messages,
                 temperature=0.2,
             )
@@ -77,7 +87,7 @@ class AIIntegration:
 
         if not self.client:
             return f"[Simulated] With context of {len(summaries)} summaries, query was: {query}"
-
+        print(query)
         try:
             resp = self.client.chat.completions.create(
                 model="gpt-4",
