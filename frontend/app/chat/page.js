@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { conversationApi } from "@/lib/api";
 import MessageList from "@/components/MessageList";
 import MessageInput from "@/components/MessageInput";
+import NewChatModal from "@/components/NewChatModal";
 import { Loader2, Plus, Menu, X } from "lucide-react";
 
 export default function ChatPage() {
@@ -13,6 +14,7 @@ export default function ChatPage() {
   const [sending, setSending] = useState(false);
   const [generatingSummary, setGeneratingSummary] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [isNewChatModalOpen, setIsNewChatModalOpen] = useState(false);
 
   useEffect(() => {
     loadConversations();
@@ -41,9 +43,8 @@ export default function ChatPage() {
     }
   };
 
-  const handleNewConversation = async () => {
+  const handleNewConversation = async (title) => {
     try {
-      const title = `Chat ${new Date().toLocaleString()}`;
       const newConversation = await conversationApi.createConversation(title);
       setConversations([newConversation, ...conversations]);
       await loadConversation(newConversation.id);
@@ -143,7 +144,7 @@ export default function ChatPage() {
 
         <div className="p-4 border-b border-gray-200 dark:border-gray-800">
           <button
-            onClick={handleNewConversation}
+            onClick={() => setIsNewChatModalOpen(true)}
             className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-indigo-700 hover:to-blue-700 text-white font-semibold py-2.5 px-4 rounded-xl flex items-center justify-center gap-2 shadow-md hover:shadow-xl transition-all duration-200"
           >
             <Plus className="w-5 h-5" /> New Chat
@@ -305,7 +306,7 @@ export default function ChatPage() {
               Start a new conversation to begin chatting
             </p>
             <button
-              onClick={handleNewConversation}
+              onClick={() => setIsNewChatModalOpen(true)}
               className="px-6 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-indigo-700 hover:to-blue-700 text-white rounded-xl font-semibold transition-all duration-200 shadow-md hover:shadow-xl"
             >
               Start New Chat
@@ -313,6 +314,12 @@ export default function ChatPage() {
           </div>
         )}
       </div>
+
+      <NewChatModal
+        isOpen={isNewChatModalOpen}
+        onClose={() => setIsNewChatModalOpen(false)}
+        onSubmit={handleNewConversation}
+      />
     </div>
   );
 }
