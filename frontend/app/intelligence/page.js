@@ -80,7 +80,7 @@ export default function IntelligencePage() {
             disabled={loading || !query.trim()}
             className="w-full px-6 py-3 bg-blue-600 hover:bg-blue-700 disabled:bg-gray-400 disabled:cursor-not-allowed text-white font-semibold rounded-lg transition-colors duration-200"
           >
-            {loading ? 'Searching...' : 'Search Conversations'}
+            {loading ? 'Searching...' : 'Query Conversations'}
           </button>
         </form>
 
