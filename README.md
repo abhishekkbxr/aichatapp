@@ -8,6 +8,10 @@ This is a modern chat application built with Next.js (frontend) and Django (back
 ![Chat Interface](screenshots/chat-interface.png)
 *Main chat interface with AI interaction*
 
+### Dark/Light Theme
+![Theme Toggle](screenshots/theme-toggle.png)
+*Application supporting both dark and light themes*
+
 ### Dashboard
 ![Dashboard](screenshots/dashboard.png)
 *Main application dashboard with overview*
@@ -18,9 +22,7 @@ This is a modern chat application built with Next.js (frontend) and Django (back
 ![Intelligence Features](screenshots/intelligence-features.png)
 *AI-powered intelligence features*
 
-### Dark/Light Theme
-![Theme Toggle](screenshots/theme-toggle.png)
-*Application supporting both dark and light themes*
+
 
 
 
