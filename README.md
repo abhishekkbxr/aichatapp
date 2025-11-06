@@ -2,6 +2,29 @@
 
 This is a modern chat application built with Next.js (frontend) and Django (backend) that enables AI-powered conversations.
 
+## Screenshots
+
+### Chat Interface
+![Chat Interface](screenshots/chat-interface.png)
+*Main chat interface with AI interaction*
+
+### Dashboard
+![Dashboard](screenshots/dashboard.png)
+*Main application dashboard with overview*
+
+![Dashboard](screenshots/dashboard1.png)
+
+### Intelligence Features
+![Intelligence Features](screenshots/intelligence-features.png)
+*AI-powered intelligence features*
+
+### Dark/Light Theme
+![Theme Toggle](screenshots/theme-toggle.png)
+*Application supporting both dark and light themes*
+
+
+
+
 ## Project Structure
 
 ```
@@ -117,6 +140,9 @@ The backend provides RESTful APIs for:
 ### Backend
 Create a `.env` file in the backend directory with:
 ```env
+DEBUG=True
+SECRET_KEY=your_secret_key
+ALLOWED_HOSTS=localhost,127.0.0.1
 OPENAI_API_KEY=your_openai_api_key
 ```
 
